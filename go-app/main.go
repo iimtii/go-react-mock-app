@@ -19,7 +19,6 @@ var fruits = []fruit{
 	{ID: 3, Name: "grape", Icon: "🍇"},
 }
 
-// ※Goではコードの記述順序は関係ないので、上に書いても下に書いても構いません。
 func main() {
 	http.HandleFunc("/", getFruits)
 	fmt.Println("Starting server at port 8080")
@@ -28,6 +27,6 @@ func main() {
 
 func getFruits(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	// ここにCORS対応コードを追加します。
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000") // 追加
 	json.NewEncoder(w).Encode(fruits)
 }
